@@ -1,0 +1,11 @@
+
+body{font-family:Arial;background:#f4f4f4;margin:0}
+.nav{background:#fff;padding:15px;display:flex;gap:20px;border-bottom:1px solid #ddd}
+.nav a{text-decoration:none;color:#333;font-weight:bold;padding:8px 14px;border-radius:5px}
+.nav a:hover{background:#dcdcdc}
+.container{padding:20px}
+.section-box{background:#fff;padding:20px;border-radius:8px;margin-top:20px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.btn{padding:10px 20px;background:#777;color:#fff;border-radius:5px;border:none;cursor:pointer}
+.btn:hover{background:#555}
+input,select,textarea{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:5px}
+.add-box{background:#eef1f5;padding:15px;border-radius:8px;margin-top:15px;display:none}

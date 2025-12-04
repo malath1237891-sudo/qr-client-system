@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><link rel='stylesheet' href='style.css'><title>Visits</title></head><body>
+<div class='nav'>
+ <a href='index.html'>Home</a>
+ <a href='scan.html'>Scan</a>
+ <a href='about.html'>About</a>
+ <a href='services.html'>Services</a>
+ <a href='contact.html'>Contact</a>
+ <a href='login.html'>Staff Login</a>
+</div>
+<div class='container'>
+<h2>Patient Visits</h2>
+<button class='btn' onclick="document.getElementById('addBox').style.display='block'">Add Visit</button>
+<div id='addBox' class='add-box'>
+ <h3>Add New Visit</h3>
+ <label>Visit Date</label><input id='v_date'>
+ <label>Department</label><input id='v_dept'>
+ <label>Doctor Name</label><input id='v_doc'>
+ <label>Diagnosis</label><input id='v_diag'>
+ <label>Notes</label><textarea id='v_notes'></textarea>
+ <button class='btn' onclick='saveVisit()'>Save</button>
+</div>
+
+<div class='section-box'>
+ <h3>Visits List</h3>
+ <select id='visitsSelect' onchange='loadVisit()'>
+   <option value=''>-- Select Visit --</option>
+ </select>
+
+ <div id='visitView' style='margin-top:20px'></div>
+</div>
+
+<script>
+function saveVisit(){
+ let d=document.getElementById('v_date').value;
+ if(!d){alert('Enter date');return;}
+ let obj={
+   date:d,
+   dept:document.getElementById('v_dept').value,
+   doc:document.getElementById('v_doc').value,
+   diag:document.getElementById('v_diag').value,
+   notes:document.getElementById('v_notes').value
+ };
+ let arr=JSON.parse(localStorage.getItem('visits')||"[]");
+ arr.push(obj);
+ localStorage.setItem('visits',JSON.stringify(arr));
+ loadList();
+ document.getElementById('addBox').style.display='none';
+}
+
+function loadList(){
+ let arr=JSON.parse(localStorage.getItem('visits')||"[]");
+ let sel=document.getElementById('visitsSelect');
+ sel.innerHTML="<option value=''>-- Select Visit --</option>";
+ arr.forEach((v,i)=>{
+   sel.innerHTML+=`<option value='${i}'>${v.date}</option>`;
+ });
+}
+function loadVisit(){
+ let idx=document.getElementById('visitsSelect').value;
+ if(idx==="") return;
+ let arr=JSON.parse(localStorage.getItem('visits')||"[]");
+ let v=arr[idx];
+ document.getElementById('visitView').innerHTML=
+   `<b>Date:</b> ${v.date}<br><b>Dept:</b> ${v.dept}<br><b>Doctor:</b> ${v.doc}<br><b>Diagnosis:</b> ${v.diag}<br><b>Notes:</b> ${v.notes}`;
+}
+loadList();
+</script>
+</div></body></html>
