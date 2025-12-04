@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Staff Login</title><link rel="stylesheet" href="css/style.css"></head><body>
+<header class="topbar">
+  <div class="brand"><a href="index.html">Global Health Platform</a></div>
+  <nav class="nav">
+    <a href="index.html" class="navlink">Home</a>
+    <a href="scan.html" class="navlink">Scan Patient Barcode</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="services.html" class="navlink">Services</a>
+    <a href="contact.html" class="navlink">Contact</a>
+    <a href="login.html" class="navlink">Staff Login</a>
+  </nav>
+</header>
+
+<div class="container"><div class="hero"><h2>Hospital Staff Login</h2>
+<div style="margin-top:18px">
+  <div><input id="emp" class="input-pill" placeholder="Employee ID"></div>
+  <div style="margin-top:12px"><input id="pwd" class="input-pill" type="password" placeholder="Password"></div>
+  <div style="margin-top:18px"><button id="loginBtn" class="btn">Login</button></div>
+  <p class="small small-note">Forgot Password? • Contact IT Support • <a href="index.html">Return to Home</a></p>
+</div></div></div>
+<script>
+// fixed demo credentials
+const DEMO_ID = '4452895';
+const DEMO_PASS = '112233';
+document.getElementById('loginBtn').addEventListener('click', ()=>{
+  const id = document.getElementById('emp').value.trim();
+  const pw = document.getElementById('pwd').value.trim();
+  if(id === DEMO_ID && pw === DEMO_PASS){
+    // success - redirect to patient demo (you can change to dashboard later)
+    window.location = 'patient.html?pid=P1001';
+  } else {
+    alert('Invalid credentials (demo).');
+  }
+});
+</script>
+</body></html>

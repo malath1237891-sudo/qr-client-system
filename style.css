@@ -1,0 +1,50 @@
+
+:root{
+  --bg:#f4f4f4; --panel:#fff; --muted:#666; --dark:#111;
+  --accent:#bdbdbd; --accent-dark:#9e9e9e;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, Arial, Helvetica, sans-serif;background:var(--bg);color:var(--dark)}
+a{color:inherit;text-decoration:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:var(--panel);border-bottom:1px solid #e6e6e6;position:sticky;top:0;z-index:20}
+.brand a{font-weight:800}
+.nav {display:flex;gap:18px;align-items:center}
+.nav .navlink{padding:14px 18px;border-radius:4px;font-weight:700}
+.nav .navlink.active, .nav .navlink:hover{background:var(--accent);color:var(--dark)}
+
+.container{max-width:1100px;margin:30px auto;padding:0 20px}
+.hero{background: #eee;border-radius:8px;padding:48px 24px;text-align:center}
+.btn{display:inline-block;padding:14px 26px;border-radius:36px;background:var(--accent);font-weight:800;cursor:pointer;border:2px solid #9e9e9e;margin:8px}
+.input-pill{width:420px;max-width:90%;padding:16px;border-radius:36px;border:2px solid #8a8a8a;font-size:18px}
+.small{color:var(--muted);font-size:14px;margin-top:8px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.card{background:var(--panel);padding:18px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+
+.footer{padding:24px;text-align:center;color:var(--muted);margin-top:40px}
+
+/* Patient page layout */
+.container-flex{display:flex;gap:18px}
+.leftpanel{width:260px;background:#222;color:#fff;border-radius:8px;padding:12px}
+.leftpanel .brand-mini{font-weight:700;padding:8px 0;text-align:center;background:#111;border-radius:6px;margin-bottom:10px}
+.leftpanel ul{list-style:none;padding:0;margin:0}
+.leftpanel li{padding:10px;border-radius:6px;margin-bottom:6px;cursor:pointer}
+.leftpanel li.active, .leftpanel li:hover{background:#111}
+.rightpanel{flex:1;background:var(--panel);padding:18px;border-radius:8px;min-height:420px}
+
+.form-row{display:flex;gap:12px;margin-bottom:12px}
+.field{flex:1}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+input[type="text"], input[type="password"], input[type="date"], select, textarea{width:100%;padding:12px;border:1px solid #e3e3e3;border-radius:6px;font-size:15px}
+textarea{min-height:120px}
+
+.scan-area{padding:20px;text-align:center}
+#videoPreview{width:320px;max-width:90%;border-radius:8px;border:2px dashed #bbb;margin-top:10px}
+.small-note{font-size:13px;color:var(--muted)}
+
+/* responsive */
+@media(max-width:880px){
+  .container-flex{flex-direction:column}
+  .nav{gap:8px}
+  .leftpanel{width:100%}
+}

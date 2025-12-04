@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Patient Profile</title><link rel="stylesheet" href="css/style.css"></head><body>
+<header class="topbar">
+  <div class="brand"><a href="index.html">Global Health Platform</a></div>
+  <nav class="nav">
+    <a href="index.html" class="navlink">Home</a>
+    <a href="scan.html" class="navlink">Scan Patient Barcode</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="services.html" class="navlink">Services</a>
+    <a href="contact.html" class="navlink">Contact</a>
+    <a href="login.html" class="navlink">Staff Login</a>
+  </nav>
+</header>
+
+<div class="container container-flex">
+  <aside class="leftpanel">
+    <div class="brand-mini">Patient Record</div>
+    <div id="patientIdBox" style="padding:8px;background:#111;margin-bottom:10px;border-radius:6px;text-align:center;color:#fff">Patient: —</div>
+    <ul id="sections">
+      <li data-s="basic" class="active">Patient Information</li>
+      <li data-s="medical">Medical Information</li>
+      <li data-s="visits">Visits</li>
+      <li data-s="labs">Laboratory Tests</li>
+      <li data-s="radio">Radiology</li>
+      <li data-s="meds">Medications</li>
+      <li data-s="appts">Appointments</li>
+      <li data-s="files">Attachments</li>
+      <li data-s="notes">Notes</li>
+      <li data-s="actions">Record Actions</li>
+    </ul>
+  </aside>
+  <section class="rightpanel" id="rightpanel">
+    <!-- dynamic area -->
+  </section>
+</div>
+<footer class="footer">© Global Health Platform</footer>
+<script src="js/patient_app.js"></script>
+</body></html>

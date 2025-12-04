@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Scan Patient</title><link rel="stylesheet" href="css/style.css"></head><body>
+<header class="topbar">
+  <div class="brand"><a href="index.html">Global Health Platform</a></div>
+  <nav class="nav">
+    <a href="index.html" class="navlink">Home</a>
+    <a href="scan.html" class="navlink">Scan Patient Barcode</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="services.html" class="navlink">Services</a>
+    <a href="contact.html" class="navlink">Contact</a>
+    <a href="login.html" class="navlink">Staff Login</a>
+  </nav>
+</header>
+
+<div class="container"><div class="hero"><h2>Scan Patient Barcode</h2>
+<div class="scan-area">
+  <button id="startScan" class="btn">Start Camera Scan</button>
+  <div id="videoWrap">
+    <video id="videoPreview" autoplay playsinline></video>
+  </div>
+  <p class="small-note">If camera scan is not supported, enter Patient ID below and press Search.</p>
+  <div style="margin-top:18px">
+    <input id="pid" class="input-pill" placeholder="Patient ID (e.g. P1001)">
+    <button id="searchBtn" class="btn">Search</button>
+  </div>
+</div></div></div>
+<script>
+const video = document.getElementById('videoPreview');
+const startBtn = document.getElementById('startScan');
+const searchBtn = document.getElementById('searchBtn');
+const pidInput = document.getElementById('pid');
+
+function openPatient(pid){ if(!pid) { alert('Enter Patient ID'); return;} window.location='patient.html?pid='+encodeURIComponent(pid); }
+
+searchBtn.addEventListener('click', ()=> openPatient(pidInput.value.trim()));
+
+startBtn.addEventListener('click', async ()=>{
+  pidInput.value='';
+  if(window.BarcodeDetector){
+    const formats = ['qr_code','code_128','ean_13','code_39'];
+    try{
+      const detector = new BarcodeDetector({formats});
+      const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+      video.srcObject = stream;
+      video.style.display='block';
+      const scanLoop = async ()=>{
+        try{
+          const barcodes = await detector.detect(video);
+          if(barcodes && barcodes.length){
+            const text = barcodes[0].rawValue || barcodes[0].rawData;
+            stopStream(stream);
+            openPatient(text);
+            return;
+          }
+        }catch(e){}
+        requestAnimationFrame(scanLoop);
+      };
+      scanLoop();
+    }catch(err){
+      alert('Camera scan not available. Use manual input.');
+    }
+  } else {
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+      video.srcObject = stream;
+      video.style.display='block';
+      alert('Preview active — if QR detection not supported, take picture then enter ID manually.');
+    }catch(e){
+      alert('Camera not available — use manual entry.');
+    }
+  }
+});
+
+function stopStream(stream){
+  if(!stream) return;
+  const tracks = stream.getTracks();
+  tracks.forEach(t=>t.stop());
+}
+</script>
+</body></html>
