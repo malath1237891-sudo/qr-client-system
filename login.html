@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Employee Login</title></head>
+<body>
+  <h2>Employee Login (for scanned client)</h2>
+  <form id="f">
+    <input id="emp" placeholder="Employee number" required><br>
+    <input id="pwd" placeholder="Password" type="password" required><br>
+    <button>Login</button>
+  </form>
+  <div id="msg"></div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+    document.getElementById('f').addEventListener('submit', async e => {
+      e.preventDefault();
+      const emp = document.getElementById('emp').value;
+      const pwd = document.getElementById('pwd').value;
+      try{
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ employee_number: emp, password: pwd })
+        });
+        if(!res.ok) throw new Error('Login failed');
+        const js = await res.json();
+        localStorage.setItem('token', js.token);
+        // find client id via barcode
+        const clientRes = await fetch('/api/clients/by-barcode/' + token);
+        const client = await clientRes.json();
+        location.href = 'client.html?id=' + client.id;
+      }catch(err){
+        document.getElementById('msg').innerText = 'Login failed. Check credentials and backend.';
+      }
+    });
+  </script>
+</body>
+</html>
