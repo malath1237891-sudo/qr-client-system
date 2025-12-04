@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: qr-client-system
-    env: node
-    buildCommand: ""
-    startCommand: "node server.js"
-    plan: free
-    rootDir: .
